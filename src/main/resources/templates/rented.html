@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Your rented car collection</title>
+</head>
+<body>
+<h1>Here you can see your rented car collection:</h1>
+<table border="3px" bgcolor="#000000" align="centre">
+  <thead>
+  <tr>
+    <th width="120" height="60" bgcolor="#00CED1" class="class1">Brand</th>
+    <th width="120" height="60" bgcolor="#00CED1" class="class1">Model</th>
+    <th width="120" height="60" bgcolor="#00CED1" class="class1">Year</th>
+    <th width="180" height="60" bgcolor="#00CED1" class="class1">Run</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr th:each="car:${user.getRented()}">
+    <td width="80" height="30" bgcolor="#7FFFD4"><h4 th:text="${car.getBrand()}" class="class1"></h4></td>
+    <td width="80" height="30" bgcolor="#7FFFD4"><h4 th:text="${car.getModel()}" class="class1"></h4></td>
+    <td width="80" height="30" bgcolor="#7FFFD4"><h4 th:text="${car.getYear()}" class="class1"></h4></td>
+    <td width="80" height="30" bgcolor="#7FFFD4"><h4 th:text="${car.getRun()}" class="class1"></h4></td>
+  </tr>
+  </tbody>
+</table>
+</body>
+</html>

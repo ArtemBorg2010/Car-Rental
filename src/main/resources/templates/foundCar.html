@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Found cars</title>
+</head>
+<body>
+<h1>The best options for your search:</h1>
+<table border="3px" bgcolor="#deb887" align="centre">
+    <thead>
+    <tr>
+        <th width="120" height="60" bgcolor="#F4A460" class="class1">Brand</th>
+        <th width="120" height="60" bgcolor="#F4A460" class="class1">Model</th>
+        <th width="120" height="60" bgcolor="#F4A460" class="class1">Year</th>
+        <th width="180" height="60" bgcolor="#F4A460" class="class1">Run</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="car:${goodCars}">
+        <td width="80" height="30" bgcolor="#FFDEAD"><h4 th:text="${car.getBrand()}" class="class1"></h4></td>
+        <td width="80" height="30" bgcolor="#FFDEAD"><h4 th:text="${car.getModel()}" class="class1"></h4></td>
+        <td width="80" height="30" bgcolor="#FFDEAD"><h4 th:text="${car.getYear()}" class="class1"></h4></td>
+        <td width="80" height="30" bgcolor="#FFDEAD"><h4 th:text="${car.getRun()}" class="class1"></h4></td>
+    </tr>
+    </tbody>
+</table>
+<h3>Would you like to rent this car?</h3>
+<a></a>
+</body>
+</html>
