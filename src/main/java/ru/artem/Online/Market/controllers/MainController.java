@@ -99,7 +99,6 @@ public class MainController {
 
     @GetMapping("/rentSuccess")
     public String getRentSuccess(){
-        System.out.println();
         user.rent(rentedCar);
         return "menu";
     }
