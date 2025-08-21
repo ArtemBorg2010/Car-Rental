@@ -6,10 +6,8 @@
 </head>
 <body>
 <h1>Your profile:</h1>
-<h2>Username</h2>
-<h2 th:text="user.getName()"></h2>
-<h2>Password</h2>
-<h2 th:text="user.getPassword()"></h2>
+<h2>Username</h2><h2 th:text="${user.getUsername()}"></h2>
+<h2>Password</h2><h2 th:text="${user.getPassword()}"></h2>
 <h2><a href="http://localhost:8080/rented">Rented cars</a></h2>
 <h3><a href="http://localhost:8080/changeProfile">Change username and password</a></h3>
 </body>

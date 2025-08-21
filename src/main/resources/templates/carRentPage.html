@@ -9,7 +9,7 @@
 <form method="post" action="/foundCar" th:object="${car}">
   Brand: <input type="text" name="brand" id="brand" th:field="*{brand}"><br>
   Model: <input type="text" name="model" id="model" th:field="*{model}"><br>
-  Time (days): <input type="text" name="time" id="time"><br>
+  Time (days): <input type="number" name="time" id="time"><br>
   <button type="submit">Find</button>
 </form>
 </body>

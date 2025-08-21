@@ -54,6 +54,22 @@ public class Garage {
         }
         return flag;
     }
+    public Car findCarValue(Car car) {
+        boolean flag = false;
+        for (Car value : cars) {
+            if (car.getBrand().equals(value.getBrand()) &&
+                    car.getModel().equals(value.getModel())) {
+                return value;
+            }
+        }
+        Car empty=new Car();
+        empty.setBrand("");
+        empty.setModel("");
+        empty.setYear(0);
+        empty.setRun(0);
+        return empty;
+    }
+
     public List<Car> getFoundCars(Car car){
         List<Car>goodCars=new ArrayList<>();
         for (Car value : cars) {

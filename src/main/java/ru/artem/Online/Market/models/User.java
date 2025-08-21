@@ -4,6 +4,7 @@ import lombok.Getter;
 import lombok.Setter;
 import org.springframework.stereotype.Component;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Component
@@ -14,7 +15,7 @@ public class User {
     private String password;
     private boolean admin=false;
     private int balance;
-    private List<Car> rented;
+    private List<Car> rented=new ArrayList<>();
 
     public void rent(Car newCar){
         rented.add(newCar);

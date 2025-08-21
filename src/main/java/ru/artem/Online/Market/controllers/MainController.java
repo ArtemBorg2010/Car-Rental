@@ -25,6 +25,9 @@ public class MainController {
     @Autowired
     private User user;
 
+    @Autowired
+    private Car rentedCar;
+
     @GetMapping("/menu")
     public String getMenu(Model model) {
         //model.addAllAttributes(Map.of());
@@ -60,7 +63,8 @@ public class MainController {
     public String getFoundCar(@ModelAttribute("car") Car newCar, Model model) {
         model.addAttribute("car", newCar);
         if (garage.findCar(newCar)) {
-            user.rent(newCar);
+            Car rentCar=garage.findCarValue(newCar);
+            user.rent(rentCar);
             List<Car> goodCars = garage.getFoundCars(newCar);
             model.addAttribute("goodCars", goodCars);
             return "foundCar";
@@ -89,6 +93,13 @@ public class MainController {
     @PostMapping("/carRent")
     public String getCarRent(@ModelAttribute("car") Car newCar, Model model) {
         model.addAttribute("car", newCar);
+        rentedCar=newCar;
         return "redirect:/foundCar";
+    }
+
+    @GetMapping("/rentSuccess")
+    public String getRentSuccess(){
+        user.rent(rentedCar);
+        return "menu";
     }
 }
