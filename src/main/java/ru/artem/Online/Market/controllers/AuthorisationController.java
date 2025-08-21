@@ -22,11 +22,13 @@ public class AuthorisationController {
     }
 
     @PostMapping("/authorisation")
-    public String greet(@ModelAttribute("user") User user) {
-        if (Objects.equals(user.getUsername(), "Artem") &&
-                Objects.equals(user.getPassword(), "1")) {
+    public String greet(@ModelAttribute("user") User user2) {
+        if (Objects.equals(user2.getUsername(), "Artem") &&
+                Objects.equals(user2.getPassword(), "123")) {
             user.setAdmin(true);
         }
+        user.setUsername(user2.getUsername());
+        user.setPassword(user2.getPassword());
         return "redirect:/menu";
     }
 }
