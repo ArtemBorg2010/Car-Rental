@@ -11,9 +11,9 @@ import java.util.List;
 @Setter
 @Component
 public class Garage {
-    private List<Car> cars;
+    private List<Car> cars = new ArrayList<>();
 
-    public void fill() {
+    public Garage() {
         Car car1 = new Car();
 
         car1.setBrand("Mercedes-Benz");
@@ -35,8 +35,9 @@ public class Garage {
         car3.setYear(2023);
         car3.setRun(2479);
 
-
-        cars = List.of(car1, car2, car3);
+        cars.add(car1);
+        cars.add(car2);
+        cars.add(car3);
     }
 
     public void addCar(Car car) {

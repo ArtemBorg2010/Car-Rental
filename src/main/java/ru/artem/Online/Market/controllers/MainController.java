@@ -31,8 +31,8 @@ public class MainController {
     @GetMapping("/menu")
     public String getMenu(Model model) {
         //model.addAllAttributes(Map.of());
-        model.addAttribute("car", car);
-        garage.fill();
+        model.addAttribute("user",user);
+        //garage.fill();
         return "menu";
     }
 
@@ -63,8 +63,7 @@ public class MainController {
     public String getFoundCar(@ModelAttribute("car") Car newCar, Model model) {
         model.addAttribute("car", newCar);
         if (garage.findCar(newCar)) {
-            Car rentCar=garage.findCarValue(newCar);
-            user.rent(rentCar);
+            rentedCar=garage.findCarValue(newCar);
             List<Car> goodCars = garage.getFoundCars(newCar);
             model.addAttribute("goodCars", goodCars);
             return "foundCar";
@@ -93,7 +92,6 @@ public class MainController {
     @PostMapping("/carRent")
     public String getCarRent(@ModelAttribute("car") Car newCar, Model model) {
         model.addAttribute("car", newCar);
-        rentedCar=newCar;
         return "redirect:/foundCar";
     }
 
