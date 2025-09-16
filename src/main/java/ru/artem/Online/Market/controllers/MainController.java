@@ -6,6 +6,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import ru.artem.Online.Market.models.Car;
 import ru.artem.Online.Market.models.Garage;
 import ru.artem.Online.Market.models.User;
@@ -28,11 +29,11 @@ public class MainController {
     @Autowired
     private Car rentedCar;
 
+    int days;
+
     @GetMapping("/menu")
     public String getMenu(Model model) {
-        //model.addAllAttributes(Map.of());
         model.addAttribute("user",user);
-        //garage.fill();
         return "menu";
     }
 
@@ -80,7 +81,12 @@ public class MainController {
     @PostMapping("/changeProfile")
     public String changeProfile(@ModelAttribute("user") User newUser, Model model){
         model.addAttribute("newUser",newUser);
-        return "redirect:/changeProfilePage";
+        user.setUsername(newUser.getUsername());
+        user.setPassword(newUser.getPassword());
+        user.setRented(new ArrayList<>());
+        user.setBalance(1000);
+        user.setAdmin(false);
+        return "redirect:/profile";
     }
 
     @GetMapping("/carRentPage")
@@ -90,14 +96,23 @@ public class MainController {
     }
 
     @PostMapping("/carRent")
-    public String getCarRent(@ModelAttribute("car") Car newCar, Model model) {
+    public String getCarRent(@ModelAttribute("car") Car newCar,
+                             @RequestParam("time") int time,
+                             Model model) {
         model.addAttribute("car", newCar);
+        days=time;
         return "redirect:/foundCar";
     }
 
     @GetMapping("/rentSuccess")
     public String getRentSuccess(){
-        user.rent(rentedCar);
-        return "menu";
+        user.rent(rentedCar,days);
+        return "redirect:/menu";
+    }
+
+    @GetMapping("/addFundsPage")
+    public String addFundsPage(Model model){
+        model.addAttribute("user",user);
+        return "addFundsPage";
     }
 }

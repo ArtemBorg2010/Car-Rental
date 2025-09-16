@@ -31,15 +31,22 @@ public class AdminController {
 
     @PostMapping("/adminAddCarProgress")
     public String addCar(@ModelAttribute("car") Car newCar, Model model){
-        changedCar=newCar;
+
         garage.addCar(newCar);
         model.addAttribute("user",user);
         return "menu";
     }
 
-//    @GetMapping("/adminCarAdded")
-//    public String carAdded(){
-//        car= changedCar;
-//        return "menu";
-//    }
+    @GetMapping("/adminRemoveCar")
+    public String removeCarPage(Model model){
+        model.addAttribute("car",car);
+        return "adminRemoveCar";
+    }
+
+    @PostMapping("/adminRemoveCarProgress")
+    public String removeCar(@ModelAttribute("car") Car newCar, Model model){
+        garage.removeCar(newCar);
+        return "redirect:/menu";
+    }
+
 }
