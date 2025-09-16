@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Admin remove Car</title>
+</head>
+<body>
+<h2>Now you can remove a new automobile to the list.</h2>
+<form method="post" action="/adminRemoveCarProgress" th:object="${car}">
+  Brand: <input type="text" name="brand" id="brand" th:field="*{brand}"><br>
+  Model: <input type="text" name="model" id="model" th:field="*{model}"><br>
+  Year: <input type="text" name="year" id="year" th:field="*{year}"><br>
+  Run: <input type="text" name="run" id="run" th:field="*{run}"><br>
+  <button type="submit">Remove</button>
+</form>
+</body>
+</html>

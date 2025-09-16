@@ -3,12 +3,38 @@
 <head>
     <meta charset="UTF-8">
     <title>Profile</title>
+    <style>
+        .container {
+          display: flex;
+        }
+    </style>
 </head>
 <body>
 <h1>Your profile:</h1>
-<h2>Username</h2><h2 th:text="${user.getUsername()}"></h2>
-<h2>Password</h2><h2 th:text="${user.getPassword()}"></h2>
-<h2><a href="http://localhost:8080/rented">Rented cars</a></h2>
-<h3><a href="http://localhost:8080/changeProfile">Change username and password</a></h3>
+<div class="container">
+    <p><h2>Username: </h2></p>
+    <p><h2 th:text="${user.getUsername()}"></h2></p>
+</div>
+<div class="container">
+    <p><h2>Password: </h2></p>
+    <p><h2 th:text="${user.getPassword()}"></h2></p>
+</div>
+<div class="container">
+    <p><h2>Balance: </h2></p>
+    <p><h2 th:text="${user.getBalance()}"></h2></p>
+    <p><h2 class="class1">$</h2></p>
+</div>
+<form method="get" action="rented">
+    <button type="submit">See rented cars</button>
+</form>
+<form method="get" action="changeProfilePage">
+    <button type="submit">Change username and password</button>
+</form>
+<form method="get" action="changeProfilePage">
+    <button type="submit"></button>
+</form>
+<form method="get" action="menu">
+    <button type="submit">Go back</button>
+</form>
 </body>
 </html>

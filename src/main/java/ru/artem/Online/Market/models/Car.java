@@ -12,4 +12,5 @@ public class Car {
     private String model;
     private int year;
     private int run;
+    private double price;
 }

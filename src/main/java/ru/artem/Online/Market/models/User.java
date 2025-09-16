@@ -14,10 +14,19 @@ public class User {
     private String username;
     private String password;
     private boolean admin=false;
-    private int balance;
+    private int balance=1000;
     private List<Car> rented=new ArrayList<>();
 
-    public void rent(Car newCar){
+    public void addFunds(int sum){
+        balance+=sum;
+    }
+    public void rent(Car newCar, int days){
         rented.add(newCar);
+        double sum=Math.round((newCar.getPrice()*days) * 10.0) / 10.0;
+        if(balance>=sum){
+            balance-=sum;
+        }else{
+            
+        }
     }
 }

@@ -4,6 +4,11 @@
     <meta charset="UTF-8">
     <title>Car List</title>
     <link rel="stylesheet" href="/styles.css">
+    <style>
+      .container {
+        display: flex;
+      }
+    </style>
 </head>
 <body>
 <table border="3px" bgcolor="#deb887" align="centre">
@@ -13,6 +18,7 @@
     <th width="120" height="60" bgcolor="#F4A460" class="class1">Model</th>
     <th width="120" height="60" bgcolor="#F4A460" class="class1">Year</th>
     <th width="180" height="60" bgcolor="#F4A460" class="class1">Run</th>
+    <th width="180" height="60" bgcolor="#F4A460" class="class1">Price</th>
   </tr>
   </thead>
   <tbody>
@@ -21,9 +27,16 @@
     <td width="80" height="30" bgcolor="#FFDEAD"><h4 th:text="${car.getModel()}" class="class1"></h4></td>
     <td width="80" height="30" bgcolor="#FFDEAD"><h4 th:text="${car.getYear()}" class="class1"></h4></td>
     <td width="80" height="30" bgcolor="#FFDEAD"><h4 th:text="${car.getRun()}" class="class1"></h4></td>
+    <td width="80" height="30" bgcolor="#FFDEAD"><div class="container">
+        <p><h4 th:text="${car.getPrice()}" class="class1"></h4></p>
+        <p><h4 class="class1">$</h4></p>
+      </div>
+    </td>
   </tr>
   </tbody>
 </table>
-<a href="http://localhost:8080/menu">Go back</a>
+<form method="get" action="menu">
+  <button type="submit">Go back</button>
+</form>
 </body>
 </html>

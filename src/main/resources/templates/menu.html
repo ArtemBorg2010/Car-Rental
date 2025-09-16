@@ -1,10 +1,16 @@
 <!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
   <meta charset="UTF-8">
   <title>Main Page</title>
   <link rel="stylesheet" href="/styles.css">
 </head>
 <body>
+<div th:if="${user.isAdmin()}">
+  <h2>You are an admin. Admin GUI enabled.</h2>
+  <a href="http://localhost:8080/adminAddCar">Admin: Add a new car to the list;</a><br>
+  <a href="http://localhost:8080/adminRemoveCar">Admin: Remove a car from the list;</a><br>
+</div>
 <p align="right"><a href="http://localhost:8080/profile">Profile</a></p>
 <h1 align="centre">Welcome to the main page. Now you can:</h1>
 <a href="http://localhost:8080/garage" class="class1">1. See the car list;</a><br>
