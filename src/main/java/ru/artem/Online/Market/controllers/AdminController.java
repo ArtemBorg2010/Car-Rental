@@ -9,19 +9,19 @@ import org.springframework.web.bind.annotation.PostMapping;
 import ru.artem.Online.Market.models.Car;
 import ru.artem.Online.Market.models.Garage;
 import ru.artem.Online.Market.models.User;
+import ru.artem.Online.Market.services.GarageService;
+import ru.artem.Online.Market.services.impl.GarageServiceImpl;
 
 @Controller
 public class AdminController {
     @Autowired
-    Garage garage;
+    private GarageService garageService;
 
     @Autowired
-    Car car;
+    private Car car;
 
     @Autowired
-    User user;
-
-    Car changedCar;
+    private User user;
 
     @GetMapping("/adminAddCar")
     public String addCarPage(Model model){
@@ -31,8 +31,7 @@ public class AdminController {
 
     @PostMapping("/adminAddCarProgress")
     public String addCar(@ModelAttribute("car") Car newCar, Model model){
-
-        garage.addCar(newCar);
+        garageService.addCar(newCar);
         model.addAttribute("user",user);
         return "menu";
     }
@@ -45,7 +44,7 @@ public class AdminController {
 
     @PostMapping("/adminRemoveCarProgress")
     public String removeCar(@ModelAttribute("car") Car newCar, Model model){
-        garage.removeCar(newCar);
+        garageService.removeCar(newCar);
         return "redirect:/menu";
     }
 

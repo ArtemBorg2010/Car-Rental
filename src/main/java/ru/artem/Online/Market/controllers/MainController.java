@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import ru.artem.Online.Market.models.Car;
 import ru.artem.Online.Market.models.Garage;
 import ru.artem.Online.Market.models.User;
+import ru.artem.Online.Market.services.GarageService;
+import ru.artem.Online.Market.services.UserService;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,6 +19,13 @@ import java.util.Map;
 
 @Controller
 public class MainController {
+
+    @Autowired
+    private UserService userService;
+
+    @Autowired
+    private GarageService garageService;
+
     @Autowired
     private Car car;
 
@@ -33,15 +42,16 @@ public class MainController {
 
     @GetMapping("/menu")
     public String getMenu(Model model) {
-        model.addAttribute("user",user);
+        model.addAttribute("user", user);
         return "menu";
     }
 
     @GetMapping("/profile")
-    public String getProfile(Model model){
+    public String getProfile(Model model) {
         model.addAttribute("user", user);
         return "profile";
     }
+
     @GetMapping("/garage")
     public String getGarage(Model model) {
         model.addAttribute("garage", garage);
@@ -64,28 +74,25 @@ public class MainController {
     public String getFoundCar(@ModelAttribute("car") Car newCar, Model model) {
         model.addAttribute("car", newCar);
         if (garage.findCar(newCar)) {
-            rentedCar=garage.findCarValue(newCar);
-            List<Car> goodCars = garage.getFoundCars(newCar);
+            rentedCar = garageService.findCarValue(newCar);
+            List<Car> goodCars = garageService.getFoundCars(newCar);
             model.addAttribute("goodCars", goodCars);
             return "foundCar";
         } else {
             return "redirect:/error";
         }
     }
+
     @GetMapping("/changeProfilePage")
-    public String getChangeProfilePage(Model model){
-        model.addAttribute("user",user);
+    public String getChangeProfilePage(Model model) {
+        model.addAttribute("user", user);
         return "changeProfilePage";
     }
 
     @PostMapping("/changeProfile")
-    public String changeProfile(@ModelAttribute("user") User newUser, Model model){
-        model.addAttribute("newUser",newUser);
-        user.setUsername(newUser.getUsername());
-        user.setPassword(newUser.getPassword());
-        user.setRented(new ArrayList<>());
-        user.setBalance(1000);
-        user.setAdmin(false);
+    public String changeProfile(@ModelAttribute("user") User newUser, Model model) {
+        model.addAttribute("newUser", newUser);
+        user = userService.fillUser(newUser);
         return "redirect:/profile";
     }
 
@@ -100,19 +107,19 @@ public class MainController {
                              @RequestParam("time") int time,
                              Model model) {
         model.addAttribute("car", newCar);
-        days=time;
+        days = time;
         return "redirect:/foundCar";
     }
 
     @GetMapping("/rentSuccess")
-    public String getRentSuccess(){
-        user.rent(rentedCar,days);
+    public String getRentSuccess() {
+        userService.rent(rentedCar,days);
         return "redirect:/menu";
     }
 
     @GetMapping("/addFundsPage")
-    public String addFundsPage(Model model){
-        model.addAttribute("user",user);
+    public String addFundsPage(Model model) {
+        model.addAttribute("user", user);
         return "addFundsPage";
     }
 }

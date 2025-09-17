@@ -21,12 +21,15 @@ public class User {
         balance+=sum;
     }
     public void rent(Car newCar, int days){
-        rented.add(newCar);
+        addRented(newCar);
         double sum=Math.round((newCar.getPrice()*days) * 10.0) / 10.0;
         if(balance>=sum){
             balance-=sum;
         }else{
             
         }
+    }
+    public void addRented(Car car){
+        rented.add(car);
     }
 }
