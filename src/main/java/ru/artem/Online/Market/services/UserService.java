@@ -11,6 +11,4 @@ public interface UserService {
     User fillUser(User newUser);
 
     void rent(Car newCar, int days);
-
-    void setAdmin(boolean admin);
 }
