@@ -21,18 +21,12 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void rent(Car newCar, int days) {
-        int balance=user.getBalance();
+        int balance = user.getBalance();
         user.addRented(newCar);
-        double sum=Math.round((newCar.getPrice()*days) * 10.0) / 10.0;
-        if(balance>=sum){
-            balance-=sum;
+        double sum = Math.round((newCar.getPrice() * days) * 10.0) / 10.0;
+        if (balance >= sum) {
+            balance -= sum;
         }
         user.setBalance(balance);
     }
-
-    @Override
-    public void setAdmin(boolean admin) {
-
-    }
-
 }

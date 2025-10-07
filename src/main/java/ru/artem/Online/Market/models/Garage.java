@@ -39,7 +39,7 @@ public class Garage {
         car3.setRun(2479);
         car3.setPrice(299);
 
-        cars.addAll(Arrays.asList(car1,car2,car3));
+        cars.addAll(Arrays.asList(car1, car2, car3));
     }
 
     public void addCar(Car car) {

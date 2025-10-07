@@ -24,26 +24,26 @@ public class AdminController {
     private User user;
 
     @GetMapping("/adminAddCar")
-    public String addCarPage(Model model){
-        model.addAttribute("car",car);
+    public String addCarPage(Model model) {
+        model.addAttribute("car", car);
         return "adminAddCar";
     }
 
     @PostMapping("/adminAddCarProgress")
-    public String addCar(@ModelAttribute("car") Car newCar, Model model){
+    public String addCar(@ModelAttribute("car") Car newCar, Model model) {
         garageService.addCar(newCar);
-        model.addAttribute("user",user);
+        model.addAttribute("user", user);
         return "menu";
     }
 
     @GetMapping("/adminRemoveCar")
-    public String removeCarPage(Model model){
-        model.addAttribute("car",car);
+    public String removeCarPage(Model model) {
+        model.addAttribute("car", car);
         return "adminRemoveCar";
     }
 
     @PostMapping("/adminRemoveCarProgress")
-    public String removeCar(@ModelAttribute("car") Car newCar, Model model){
+    public String removeCar(@ModelAttribute("car") Car newCar, Model model) {
         garageService.removeCar(newCar);
         return "redirect:/menu";
     }

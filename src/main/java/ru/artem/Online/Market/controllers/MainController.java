@@ -73,7 +73,7 @@ public class MainController {
     @PostMapping("/foundCar")
     public String getFoundCar(@ModelAttribute("car") Car newCar, Model model) {
         model.addAttribute("car", newCar);
-        if (garage.findCar(newCar)) {
+        if (garageService.findCar(newCar)) {
             rentedCar = garageService.findCarValue(newCar);
             List<Car> goodCars = garageService.getFoundCars(newCar);
             model.addAttribute("goodCars", goodCars);
@@ -113,7 +113,7 @@ public class MainController {
 
     @GetMapping("/rentSuccess")
     public String getRentSuccess() {
-        userService.rent(rentedCar,days);
+        userService.rent(rentedCar, days);
         return "redirect:/menu";
     }
 
