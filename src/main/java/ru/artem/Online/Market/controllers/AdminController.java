@@ -7,10 +7,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import ru.artem.Online.Market.models.Car;
-import ru.artem.Online.Market.models.Garage;
 import ru.artem.Online.Market.models.User;
 import ru.artem.Online.Market.services.GarageService;
-import ru.artem.Online.Market.services.impl.GarageServiceImpl;
 
 @Controller
 public class AdminController {
@@ -18,14 +16,11 @@ public class AdminController {
     private GarageService garageService;
 
     @Autowired
-    private Car car;
-
-    @Autowired
     private User user;
 
     @GetMapping("/adminAddCar")
     public String addCarPage(Model model) {
-        model.addAttribute("car", car);
+        model.addAttribute("car", new Car());
         return "adminAddCar";
     }
 
@@ -38,7 +33,7 @@ public class AdminController {
 
     @GetMapping("/adminRemoveCar")
     public String removeCarPage(Model model) {
-        model.addAttribute("car", car);
+        model.addAttribute("car", new Car());
         return "adminRemoveCar";
     }
 

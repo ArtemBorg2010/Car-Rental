@@ -1,13 +1,13 @@
 package ru.artem.Online.Market.services;
 
-import org.springframework.stereotype.Service;
 import ru.artem.Online.Market.models.Car;
+import ru.artem.Online.Market.models.Garage;
 
-import java.util.ArrayList;
 import java.util.List;
 
-@Service
+
 public interface GarageService {
+    Garage getGarage();
     void addCar(Car car);
 
     void removeCar(Car car);
@@ -17,4 +17,7 @@ public interface GarageService {
     List<Car> getFoundCars(Car car);
 
     boolean findCar(Car car);
+
+    List<Car> rentACar(Car newCar,
+                     int time);
 }

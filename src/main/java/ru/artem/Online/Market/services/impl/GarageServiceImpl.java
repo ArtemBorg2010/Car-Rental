@@ -1,14 +1,30 @@
 package ru.artem.Online.Market.services.impl;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import ru.artem.Online.Market.models.Car;
 import ru.artem.Online.Market.models.Garage;
 import ru.artem.Online.Market.services.GarageService;
+import ru.artem.Online.Market.services.UserService;
 
 import java.util.ArrayList;
 import java.util.List;
 
+@Service
 public class GarageServiceImpl implements GarageService {
+    @Autowired
     private Garage garage;
+
+    @Autowired
+    private Car rentedCar;
+
+    @Autowired
+    private UserService userService;
+
+    @Override
+    public Garage getGarage() {
+        return garage;
+    }
 
     @Override
     public void addCar(Car car) {
@@ -60,6 +76,18 @@ public class GarageServiceImpl implements GarageService {
             }
         }
         return flag;
+    }
+
+    @Override
+    public List<Car> rentACar(Car newCar, int time) {
+        if (findCar(newCar)) {
+            rentedCar = findCarValue(newCar);
+            List<Car> goodCars = getFoundCars(newCar);
+            userService.rent(rentedCar,time);
+            return goodCars;
+        } else {
+            return new ArrayList<>();
+        }
     }
 
 }
