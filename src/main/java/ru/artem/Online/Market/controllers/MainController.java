@@ -8,50 +8,42 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import ru.artem.Online.Market.models.Car;
-import ru.artem.Online.Market.models.Garage;
 import ru.artem.Online.Market.models.User;
+import ru.artem.Online.Market.services.GarageService;
+import ru.artem.Online.Market.services.UserService;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 @Controller
 public class MainController {
-    @Autowired
-    private Car car;
 
     @Autowired
-    private Garage garage;
+    private UserService userService;
 
     @Autowired
-    private User user;
-
-    @Autowired
-    private Car rentedCar;
-
-    int days;
+    private GarageService garageService;
 
     @GetMapping("/menu")
     public String getMenu(Model model) {
-        model.addAttribute("user",user);
+        model.addAttribute("user", userService.getUser());
         return "menu";
     }
 
     @GetMapping("/profile")
-    public String getProfile(Model model){
-        model.addAttribute("user", user);
+    public String getProfile(Model model) {
+        model.addAttribute("user", userService.getUser());
         return "profile";
     }
+
     @GetMapping("/garage")
     public String getGarage(Model model) {
-        model.addAttribute("garage", garage);
-        model.addAttribute("car", car);
+        model.addAttribute("garage", garageService.getGarage());
         return "garage";
     }
 
     @GetMapping("/rented")
     public String getRentedCars(Model model) {
-        model.addAttribute("user", user);
+        model.addAttribute("user", userService.getUser());
         return "rented";
     }
 
@@ -61,37 +53,34 @@ public class MainController {
     }
 
     @PostMapping("/foundCar")
-    public String getFoundCar(@ModelAttribute("car") Car newCar, Model model) {
+    public String getFoundCar(@ModelAttribute("car") Car newCar,
+                              @RequestParam("time") int time,
+                              Model model) {
         model.addAttribute("car", newCar);
-        if (garage.findCar(newCar)) {
-            rentedCar=garage.findCarValue(newCar);
-            List<Car> goodCars = garage.getFoundCars(newCar);
-            model.addAttribute("goodCars", goodCars);
-            return "foundCar";
-        } else {
-            return "redirect:/error";
+        if (!garageService.rentACar(newCar,time).isEmpty()){
+            model.addAttribute("goodCars", garageService.rentACar(newCar,time));
+            return "redirect:/menu";
+        }else{
+            return "redirect:/errorNoCarFound";
         }
     }
+
     @GetMapping("/changeProfilePage")
-    public String getChangeProfilePage(Model model){
-        model.addAttribute("user",user);
+    public String getChangeProfilePage(Model model) {
+        model.addAttribute("user", userService.getUser());
         return "changeProfilePage";
     }
 
     @PostMapping("/changeProfile")
-    public String changeProfile(@ModelAttribute("user") User newUser, Model model){
-        model.addAttribute("newUser",newUser);
-        user.setUsername(newUser.getUsername());
-        user.setPassword(newUser.getPassword());
-        user.setRented(new ArrayList<>());
-        user.setBalance(1000);
-        user.setAdmin(false);
+    public String changeProfile(@ModelAttribute("user") User newUser, Model model) {
+        model.addAttribute("newUser", newUser);
+        userService.setUser(userService.fillUser(newUser));
         return "redirect:/profile";
     }
 
     @GetMapping("/carRentPage")
     public String getCarRentPage(Model model) {
-        model.addAttribute("car", car);
+        model.addAttribute("car", new Car());
         return "carRentPage";
     }
 
@@ -100,19 +89,14 @@ public class MainController {
                              @RequestParam("time") int time,
                              Model model) {
         model.addAttribute("car", newCar);
-        days=time;
-        return "redirect:/foundCar";
-    }
-
-    @GetMapping("/rentSuccess")
-    public String getRentSuccess(){
-        user.rent(rentedCar,days);
-        return "redirect:/menu";
-    }
-
-    @GetMapping("/addFundsPage")
-    public String addFundsPage(Model model){
-        model.addAttribute("user",user);
-        return "addFundsPage";
+        if (garageService.findCar(newCar)) {
+            Car rentedCar = garageService.findCarValue(newCar);
+            List<Car> goodCars = garageService.getFoundCars(newCar);
+            model.addAttribute("goodCars", goodCars);
+            userService.rent(rentedCar,time);
+            return "menu";
+        } else {
+            return "redirect:/error";
+        }
     }
 }
