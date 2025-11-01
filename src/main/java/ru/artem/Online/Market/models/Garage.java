@@ -8,12 +8,19 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+/**
+ * Класс который содержит информацию о гараже
+ */
+
 @Getter
 @Setter
 @Component
 public class Garage {
     private List<Car> cars = new ArrayList<>();
 
+    /**
+     * Конструктор с автоматическим добавлением начальных машин
+     */
     public Garage() {
         Car car1 = new Car();
 
@@ -42,10 +49,20 @@ public class Garage {
         cars.addAll(Arrays.asList(car1, car2, car3));
     }
 
+    /**
+     * Метод добавляет машину в гараж
+     *
+     * @param car данные о машине
+     */
     public void addCar(Car car) {
         cars.add(car);
     }
 
+    /**
+     * Метод удаляет машину из гаража
+     *
+     * @param car данные о машине
+     */
     public void removeCar(Car car) {
         for (int i = 0; i < cars.size(); i++) {
             Car value = cars.get(i);
@@ -59,6 +76,12 @@ public class Garage {
         }
     }
 
+    /**
+     * Метод находит машину в гараже
+     *
+     * @param car данные о машине
+     * @return Да или нет
+     */
     public boolean findCar(Car car) {
         boolean flag = false;
         for (Car value : cars) {
@@ -71,6 +94,12 @@ public class Garage {
         return flag;
     }
 
+    /**
+     * Метод для получения данных о найденной машине
+     *
+     * @param car данные о машине
+     * @return данные о машине
+     */
     public Car findCarValue(Car car) {
         boolean flag = false;
         for (Car value : cars) {
@@ -87,6 +116,12 @@ public class Garage {
         return empty;
     }
 
+    /**
+     * Метод для получения списка машин, удовлетворяющих требованиям пользователя для аренды автомобиля
+     *
+     * @param car данные о машине
+     * @return список машин
+     */
     public List<Car> getFoundCars(Car car) {
         List<Car> goodCars = new ArrayList<>();
         for (Car value : cars) {

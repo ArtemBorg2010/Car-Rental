@@ -6,7 +6,7 @@
 </head>
 <body>
 <h1 align="centre">Search for a car you want to find in our dealership:</h1>
-<form method="post" action="/foundCar" th:object="${car}">
+<form method="post" action="/carRent" th:object="${car}">
   Brand: <input type="text" name="brand" id="brand" th:field="*{brand}"><br>
   Model: <input type="text" name="model" id="model" th:field="*{model}"><br>
   Time (days): <input type="number" name="time" id="time"><br>

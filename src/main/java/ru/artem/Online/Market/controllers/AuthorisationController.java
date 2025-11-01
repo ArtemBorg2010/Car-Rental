@@ -11,6 +11,10 @@ import ru.artem.Online.Market.services.UserService;
 
 import java.util.Objects;
 
+/**
+ * Контроллер для авторизации
+ */
+
 @Controller
 public class AuthorisationController {
     @Autowired
@@ -19,11 +23,25 @@ public class AuthorisationController {
     @Autowired
     private UserService userService;
 
+    /**
+     * Метод создает страницу для авторизации
+     *
+     * @param model модель
+     * @return страница
+     */
+
     @GetMapping("/authorisationLabel")
     public String greetingLabel(Model model) {
         model.addAttribute("user", user);
         return "authorisationLabel";
     }
+
+    /**
+     * Метод авторизует пользователя
+     *
+     * @param user2 данные авторизующегося пользователя
+     * @return страница
+     */
 
     @PostMapping("/authorisation")
     public String greet(@ModelAttribute("user") User user2) {

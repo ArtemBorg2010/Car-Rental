@@ -1,11 +1,11 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
     <title>Error</title>
 </head>
 <body>
-<h1 style="color: red">An error occurred. Try to enter another brand or model.</h1>
+<h1 style="color: red" th:text="${message}"></h1>
 <form method="get" action="menu">
     <button type="submit">Go back</button>
 </form>

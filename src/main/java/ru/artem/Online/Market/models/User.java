@@ -7,6 +7,10 @@ import org.springframework.stereotype.Component;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Класс который содержит информацию о пользователе
+ */
+
 @Component
 @Getter
 @Setter
@@ -17,10 +21,21 @@ public class User {
     private int balance = 1000;
     private List<Car> rented = new ArrayList<>();
 
+    /**
+     * Метод пополняет баланс пользователя
+     *
+     * @param sum сумма денег
+     */
     public void addFunds(int sum) {
         balance += sum;
     }
 
+    /**
+     * Метод берет в аренду машину
+     *
+     * @param newCar информация о машине
+     * @param days   срок аренды в днях
+     */
     public void rent(Car newCar, int days) {
         addRented(newCar);
         double sum = Math.round((newCar.getPrice() * days) * 10.0) / 10.0;
@@ -31,6 +46,11 @@ public class User {
         }
     }
 
+    /**
+     * Метод добавляет арендованную машину в список пользователя
+     *
+     * @param car данные о машине
+     */
     public void addRented(Car car) {
         rented.add(car);
     }
