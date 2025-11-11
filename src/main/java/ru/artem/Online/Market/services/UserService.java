@@ -1,24 +1,22 @@
 package ru.artem.Online.Market.services;
 
 import ru.artem.Online.Market.models.Car;
-import ru.artem.Online.Market.models.Garage;
 import ru.artem.Online.Market.models.User;
 
 /**
  * Интерфейс, описывающий функционал пользователя
  */
-
 public interface UserService {
     /**
      * Метод заполняет информацию о пользователе
      *
      * @param newUser данные авторизации
-     * @return пользователь
+     * @return {@link User}
      */
     User fillUser(User newUser);
 
     /**
-     * Метод берет в аренду машину
+     * Метод осуществляет аренду машины
      *
      * @param newCar информация о машине
      * @param days   срок аренды в днях
@@ -28,14 +26,14 @@ public interface UserService {
     /**
      * Метод возвращает информацию о пользователе
      *
-     * @return информацию о пользователе в виде {@link User}
+     * @return {@link User}
      */
     User getUser();
 
     /**
      * Метод изменяет информацию о пользователе
      *
-     * @param user пользователь с обновленными данными
+     * @param user обновленные данные пользователя
      */
     void setUser(User user);
 }

@@ -11,7 +11,6 @@ import java.util.List;
 /**
  * Класс который содержит информацию о гараже
  */
-
 @Getter
 @Setter
 @Component
@@ -77,10 +76,10 @@ public class Garage {
     }
 
     /**
-     * Метод находит машину в гараже
+     * Метод выясняет есть ли машина в гараже
      *
      * @param car данные о машине
-     * @return Да или нет
+     * @return True/False
      */
     public boolean findCar(Car car) {
         boolean flag = false;
@@ -95,10 +94,10 @@ public class Garage {
     }
 
     /**
-     * Метод для получения данных о найденной машине
+     * Метод ищет машину в гараже и возвращает данные о ней
      *
      * @param car данные о машине
-     * @return данные о машине
+     * @return {@link Car}
      */
     public Car findCarValue(Car car) {
         boolean flag = false;
@@ -120,7 +119,7 @@ public class Garage {
      * Метод для получения списка машин, удовлетворяющих требованиям пользователя для аренды автомобиля
      *
      * @param car данные о машине
-     * @return список машин
+     * @return список объектов {@link Car}
      */
     public List<Car> getFoundCars(Car car) {
         List<Car> goodCars = new ArrayList<>();

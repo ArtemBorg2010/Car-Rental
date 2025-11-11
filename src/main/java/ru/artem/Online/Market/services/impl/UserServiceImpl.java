@@ -7,16 +7,13 @@ import ru.artem.Online.Market.services.UserService;
 
 import java.util.ArrayList;
 
+/**
+ * Реализация функционала пользователя
+ */
 @Service
 public class UserServiceImpl implements UserService {
     private User user;
 
-    /**
-     * Метод заполняет информацию о пользователе
-     *
-     * @param newUser данные авторизации
-     * @return пользователь
-     */
     @Override
     public User fillUser(User newUser) {
         user.setUsername(newUser.getUsername());
@@ -27,12 +24,6 @@ public class UserServiceImpl implements UserService {
         return user;
     }
 
-    /**
-     * Метод берет в аренду машину
-     *
-     * @param newCar информация о машине
-     * @param days   срок аренды в днях
-     */
     @Override
     public void rent(Car newCar, int days) {
         System.out.println(user.getUsername() + " " + user.getPassword());
@@ -45,21 +36,11 @@ public class UserServiceImpl implements UserService {
         user.setBalance(balance);
     }
 
-    /**
-     * Метод возвращает информацию о пользователе
-     *
-     * @return информацию о пользователе в виде {@link User}
-     */
     @Override
     public User getUser() {
         return user;
     }
 
-    /**
-     * Метод изменяет информацию о пользователе
-     *
-     * @param newUser пользователь с обновленными данными
-     */
     @Override
     public void setUser(User newUser) {
         user = newUser;
