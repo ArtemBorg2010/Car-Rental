@@ -24,12 +24,11 @@ public class AuthorisationController {
     private UserService userService;
 
     /**
-     * Метод создает страницу для авторизации
+     * Метод собирает информацию для представления authorisationLabel
      *
      * @param model модель
-     * @return страница
+     * @return представление authorisationLabel
      */
-
     @GetMapping("/authorisationLabel")
     public String greetingLabel(Model model) {
         model.addAttribute("user", user);
@@ -40,9 +39,8 @@ public class AuthorisationController {
      * Метод авторизует пользователя
      *
      * @param user2 данные авторизующегося пользователя
-     * @return страница
+     * @return перенаправляет в URL /menu
      */
-
     @PostMapping("/authorisation")
     public String greet(@ModelAttribute("user") User user2) {
         if (Objects.equals(user2.getUsername(), "Artem") &&

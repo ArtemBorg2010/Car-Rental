@@ -13,7 +13,6 @@ import java.util.List;
 /**
  * Реализация функционала гаража
  */
-
 @Service
 public class GarageServiceImpl implements GarageService {
     @Autowired
@@ -25,42 +24,21 @@ public class GarageServiceImpl implements GarageService {
     @Autowired
     private UserService userService;
 
-    /**
-     * Метод возвращает информацию о гараже
-     *
-     * @return информацию о гараже в виде {@link Garage}
-     */
     @Override
     public Garage getGarage() {
         return garage;
     }
 
-    /**
-     * Метод добавляет машину в гараж
-     *
-     * @param car данные о машине
-     */
     @Override
     public void addCar(Car car) {
         garage.addCar(car);
     }
 
-    /**
-     * Метод удаляет машину из гаража
-     *
-     * @param car данные о машине
-     */
     @Override
     public void removeCar(Car car) {
         garage.removeCar(car);
     }
 
-    /**
-     * Метод для получения данных о найденной машине
-     *
-     * @param car данные о машине
-     * @return данные о машине
-     */
     @Override
     public Car findCarValue(Car car) {
         boolean flag = false;
@@ -78,12 +56,6 @@ public class GarageServiceImpl implements GarageService {
         return empty;
     }
 
-    /**
-     * Метод для получения списка машин, удовлетворяющих требованиям пользователя для аренды автомобиля
-     *
-     * @param car данные о машине
-     * @return список машин
-     */
     @Override
     public List<Car> getFoundCars(Car car) {
         List<Car> goodCars = new ArrayList<>();
@@ -96,12 +68,6 @@ public class GarageServiceImpl implements GarageService {
         return goodCars;
     }
 
-    /**
-     * Метод находит машину в гараже
-     *
-     * @param car данные о машине
-     * @return Да или нет
-     */
     @Override
     public boolean findCar(Car car) {
         boolean flag = false;
@@ -115,12 +81,6 @@ public class GarageServiceImpl implements GarageService {
         return flag;
     }
 
-    /**
-     * Метод берет в аренду машину
-     *
-     * @param newCar информация о машине
-     * @param time   срок аренды в днях
-     */
     @Override
     public List<Car> rentACar(Car newCar, int time) {
         if (findCar(newCar)) {
@@ -132,5 +92,4 @@ public class GarageServiceImpl implements GarageService {
             return new ArrayList<>();
         }
     }
-
 }

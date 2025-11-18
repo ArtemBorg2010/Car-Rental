@@ -10,7 +10,6 @@ import java.util.List;
 /**
  * Класс который содержит информацию о пользователе
  */
-
 @Component
 @Getter
 @Setter
@@ -31,7 +30,7 @@ public class User {
     }
 
     /**
-     * Метод берет в аренду машину
+     * Метод осуществляет аренду машины
      *
      * @param newCar информация о машине
      * @param days   срок аренды в днях
@@ -41,13 +40,11 @@ public class User {
         double sum = Math.round((newCar.getPrice() * days) * 10.0) / 10.0;
         if (balance >= sum) {
             balance -= sum;
-        } else {
-
         }
     }
 
     /**
-     * Метод добавляет арендованную машину в список пользователя
+     * Метод добавляет машину в список арендованных машин пользователя
      *
      * @param car данные о машине
      */

@@ -13,7 +13,6 @@ import ru.artem.Online.Market.services.GarageService;
 /**
  * Контроллер для команд администратора
  */
-
 @Controller
 public class AdminController {
     @Autowired
@@ -22,12 +21,11 @@ public class AdminController {
     @Autowired
     private User user;
 
-
     /**
-     * Метод добавляет машину в гараж
+     * Метод собирает информацию для представления adminAddCar
      *
      * @param model модель
-     * @return страница
+     * @return представление adminAddCar
      */
     @GetMapping("/adminAddCar")
     public String addCarPage(Model model) {
@@ -38,8 +36,9 @@ public class AdminController {
     /**
      * Метод добавляет машину в гараж
      *
-     * @param model модель
-     * @return страница
+     * @param newCar информация о машине
+     * @param model  модель
+     * @return представление menu
      */
     @PostMapping("/adminAddCarProgress")
     public String addCar(@ModelAttribute("car") Car newCar, Model model) {
@@ -49,10 +48,10 @@ public class AdminController {
     }
 
     /**
-     * Метод удаляет машину из гаража
+     * Метод собирает информацию для представления adminRemoveCar
      *
      * @param model модель
-     * @return страница
+     * @return представление adminRemoveCar
      */
     @GetMapping("/adminRemoveCar")
     public String removeCarPage(Model model) {
@@ -63,8 +62,9 @@ public class AdminController {
     /**
      * Метод удаляет машину из гаража и возвращает в меню
      *
-     * @param model модель
-     * @return страница
+     * @param newCar информация о машине
+     * @param model  модель
+     * @return перенаправляет в URL /menu
      */
     @PostMapping("/adminRemoveCarSuccess")
     public String removeCar(@ModelAttribute("car") Car newCar, Model model) {

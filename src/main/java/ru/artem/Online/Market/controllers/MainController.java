@@ -14,7 +14,6 @@ import java.util.List;
 /**
  * Главный контроллер
  */
-
 @Controller
 public class MainController {
 
@@ -25,10 +24,10 @@ public class MainController {
     private GarageService garageService;
 
     /**
-     * Метод создает страницу для меню
+     * Метод собирает информацию для представления menu
      *
      * @param model модель
-     * @return страница
+     * @return представление menu
      */
     @GetMapping("/menu")
     public String getMenu(Model model) {
@@ -37,10 +36,10 @@ public class MainController {
     }
 
     /**
-     * Метод создает страницу для профиля
+     * Метод собирает информацию для представления profile
      *
      * @param model модель
-     * @return страница
+     * @return представление profile
      */
     @GetMapping("/profile")
     public String getProfile(Model model) {
@@ -49,10 +48,10 @@ public class MainController {
     }
 
     /**
-     * Метод создает страницу для гаража
+     * Метод собирает информацию для представления garage
      *
      * @param model модель
-     * @return страница
+     * @return представление garage
      */
     @GetMapping("/garage")
     public String getGarage(Model model) {
@@ -61,23 +60,22 @@ public class MainController {
     }
 
     /**
-     * Метод создает страницу для арендованных пользователем машин
+     * Метод собирает информацию для представления rented
      *
      * @param model модель
-     * @return страница
+     * @return представление rented
      */
     @GetMapping("/rented")
     public String getRentedCars(Model model) {
-        //userService.getUser().getRented().forEach(x-> System.out.println(x.getBrand()+" "+x.getModel()));
         model.addAttribute("user", userService.getUser());
         return "rented";
     }
 
     /**
-     * Метод создает страницу для редактирования профиля
+     * Метод собирает информацию для представления changeProfilePage
      *
      * @param model модель
-     * @return страница
+     * @return представление changeProfilePage
      */
     @GetMapping("/changeProfilePage")
     public String getChangeProfilePage(Model model) {
@@ -86,10 +84,11 @@ public class MainController {
     }
 
     /**
-     * Метод редактирует профиль
+     * Метод редактирует профиль пользователя
      *
-     * @param model модель
-     * @return страница
+     * @param newUser информация о пользователе
+     * @param model   модель
+     * @return перенаправляет в URL /profile
      */
     @PostMapping("/changeProfile")
     public String changeProfile(@ModelAttribute("user") User newUser, Model model) {
@@ -99,10 +98,10 @@ public class MainController {
     }
 
     /**
-     * Метод создает страницу для аренды машины
+     * Метод собирает информацию для представления carRentPage
      *
      * @param model модель
-     * @return страница
+     * @return представление carRentPage
      */
     @GetMapping("/carRentPage")
     public String getCarRentPage(Model model) {
@@ -111,9 +110,9 @@ public class MainController {
     }
 
     /**
-     * Метод создает страницу для уведомления пользователя об успешной сделке
+     * Метод открывает представление rentSucceed
      *
-     * @return страница
+     * @return представление rentSucceed
      */
     @GetMapping("/rentSucceed")
     public String getRentSucceed() {
@@ -121,10 +120,11 @@ public class MainController {
     }
 
     /**
-     * Метод создает страницу для ошибки
+     * Метод собирает информацию для представления error
      *
-     * @param model модель
-     * @return страница
+     * @param message текст ошибки
+     * @param model   модель
+     * @return представление error
      */
     @GetMapping("/error/{message}")
     public String throwError(@PathVariable("message") String message, Model model) {
@@ -133,10 +133,12 @@ public class MainController {
     }
 
     /**
-     * Метод берет в аренду машину
+     * Метод осуществляет аренду машины
      *
-     * @param model модель
-     * @return страница
+     * @param newCar информация о машине
+     * @param time   срок аренды
+     * @param model  модель
+     * @return перенаправляет в URL /rentSucceed
      */
     @PostMapping("/carRent")
     public String getCarRent(@ModelAttribute("car") Car newCar,

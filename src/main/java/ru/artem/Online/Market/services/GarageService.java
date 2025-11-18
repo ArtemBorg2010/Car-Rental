@@ -8,12 +8,11 @@ import java.util.List;
 /**
  * Интерфейс, описывающий функционал гаража
  */
-
 public interface GarageService {
     /**
      * Метод возвращает информацию о гараже
      *
-     * @return информацию о гараже в виде {@link Garage}
+     * @return {@link Garage}
      */
     Garage getGarage();
 
@@ -35,7 +34,7 @@ public interface GarageService {
      * Метод для получения данных о найденной машине
      *
      * @param car данные о машине
-     * @return данные о машине
+     * @return {@link Car}
      */
     Car findCarValue(Car car);
 
@@ -43,23 +42,24 @@ public interface GarageService {
      * Метод для получения списка машин, удовлетворяющих требованиям пользователя для аренды автомобиля
      *
      * @param car данные о машине
-     * @return список машин
+     * @return список объектов {@link Car}
      */
     List<Car> getFoundCars(Car car);
 
     /**
-     * Метод находит машину в гараже
+     * Метод выясняет есть ли машина в гараже
      *
      * @param car данные о машине
-     * @return Да или нет
+     * @return True/False
      */
     boolean findCar(Car car);
 
     /**
-     * Метод берет в аренду машину
+     * Метод осуществляет аренду машины
      *
      * @param newCar информация о машине
      * @param time   срок аренды в днях
+     * @return список объектов {@link Car}
      */
     List<Car> rentACar(Car newCar,
                        int time);
